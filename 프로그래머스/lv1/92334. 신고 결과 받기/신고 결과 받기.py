@@ -1,17 +1,12 @@
 def solution(id_list, report, k):
-    dic = dict(map(lambda x: [x, [0,[]]], id_list))
-    
-    for r in report:
-        s, r = r.split(" ")
-        if r not in dic[s][1]:
-            dic[r][0] += 1
-            dic[s][1].append(r)
-            
-    def counter(id):
-        count = 0
-        for r in dic[id][1]:
-            if(dic[r][0] >= k):
-                count += 1
-        return count
-    
-    return list(map(counter, id_list))
+    answer = [0] * len(id_list)    
+    reports = {x : 0 for x in id_list}
+
+    for r in set(report):
+        reports[r.split()[1]] += 1
+
+    for r in set(report):
+        if reports[r.split()[1]] >= k:
+            answer[id_list.index(r.split()[0])] += 1
+
+    return answer
