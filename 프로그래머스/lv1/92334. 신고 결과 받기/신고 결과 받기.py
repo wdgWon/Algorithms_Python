@@ -1,11 +1,11 @@
 def solution(id_list, report, k):
-    dic = dict(map(lambda x: [x, [0,{}]], id_list))
+    dic = dict(map(lambda x: [x, [0,[]]], id_list))
     
     for r in report:
         s, r = r.split(" ")
         if r not in dic[s][1]:
             dic[r][0] += 1
-            dic[s][1][r] = True
+            dic[s][1].append(r)
             
     def counter(id):
         count = 0
